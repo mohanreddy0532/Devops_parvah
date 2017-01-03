@@ -1,0 +1,43 @@
+
+What is vagrant?
+Vagrant helps provision machines on top of virtual box, virtual machine, AWS or any other provider.
+Provisioning tools such as shell scripts, chef or puppet can be used to automatically install and configure s/w on the machine.
+
+What is Docker?
+Docker is a containerization tool used to provide software applications with a filesystem that contains everything they need to run. 
+Docker containers behave same, regardless of where it is deployed, because its run-time environment is consistent.
+
+What is Docker Image?
+An image is a filesystem and parameters to use at runtime. It doesn't have state and never changes.
+
+What is Docker Container?
+Container is a running instance of an image
+
+Docker Deamon
+docker daemon binds to a unix socket instead of a TCP port. 
+By default that Unix socket is owned by the user root and other users can access it with sudo.
+For this reason, docker daemon always runs as the root user
+
+Run/start/stop/remove containers?
+
+docker run hello-world
+
+rhel7
+systemctl start docker
+systemctl status docker
+// List of images on docker machine
+docker images
+// List of containers on docker machine
+
+
+
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+

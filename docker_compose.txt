@@ -1,0 +1,39 @@
+Compose is a tool for defining and running multi-container Docker applications.
+Compose is 3 step process
+1. Define your Dockerfile
+2. Define the services in docker-compose.yml
+3. run docker-compose up
+
+Compose file is a YAML file defining services, networks and volumes
+default path ./docker-compose.yml
+
+https://github.com/wardviaene/docker-demo
+usermod -aG docker praveenparva
+1. mkdir docker-demo
+2. Create Dockerfile
+3. Create docker-compose.yml
+sudo su -
+1. Install docker-compose
+curl -L "https://github.com/docker/compose/releases/download/1.9.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+2. chmod +x /usr/local/bin/docker-compose
+ 
+4. vi index-db.js
+5. vi index.js
+6. vi package.json
+
+// From starting
+Create 12.04 ubuntu on google engine
+1. sudo su -
+2. install docker
+3. add user to docker group
+usermod -aG docker praveenparva
+4. install docker-compose
+5. git clone https://github.com/wardviaene/docker-demo.git
+6. cd docker-demo
+7. docker-compose build && docker-compose up db
+8. open a new client
+9. docker-compose up -d web
+10. curl http://localhost:3000
+11. run curl http://localhost:3000 again
+
+

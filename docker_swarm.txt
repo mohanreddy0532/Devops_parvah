@@ -1,0 +1,39 @@
+Swarm enables you to natively cluster docker containers
+Docker Swarm image needs to be pulled and configured
+Use docker-machine to provision hosts and install swarm
+A discovery backend can also be enabled when using a key-value store (consul, etcd, zookeeper)
+
+// initialize a cluster of Docker engines in swarm mode
+// Adding nodes to the swarm
+// deploying application services to the swarm
+// managing the swarm once you have everything running
+
+1. Install swarm container on manager node
+docker run swarm --help
+2. docker run -d -p 8500:8500 --name=consul progrium/consul -server -bootstrap
+3. docker run -d -p 4000:4000 swarm manage -H :4000 --advertise 192.168.0.248:4000 consul://192.168.0.248:8500
+4. docker run -d swarm join --advertise=192.168.0.247:2375 consul://192.168.0.248:8500
+ 
+consul is a backend service
+
+***docker-manager
+install docker-engine --follow as per ubuntu installation
+apt-get install docker-engine
+service docker start
+docker --version
+1. Create Swarm container
+docker run swarm --help    -------pull swarm
+docker run -d -p 8500:8500 --name=consul progrium/consul -server -bootstrap     -----pull consul
+docker run -d -p 4000:4000 swarm manage -H :4000 --advertise 146.148.75.130:4000 consul://146.148.75.130:8500
+docker-agent1
+
+docker-agent2
+
+Copy ssh key from one machine to another machine
+/home/praveenparva/.ssh
+ssh-keygen -t rsa
+cat id_rsa.pub
+Copy this key into authorised files of the connecting machine
+
+Docker-compose 
+//manage multiple containers, docker-compose up -----similar to vagrant

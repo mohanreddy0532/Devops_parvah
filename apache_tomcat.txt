@@ -1,0 +1,25 @@
+
+Install apache on ubuntu
+1. sudo su -
+2. apt-get install apache2
+3. change /var/www/html/index.html to reflect on browser
+4. Use curl http://ipaddress for headless browser
+5. service httpd status/start/stop
+
+Installing tomcat7 on ubuntu
+1. apt-get install tomcat7
+https://www.digitalocean.com/community/tutorials/how-to-install-apache-tomcat-7-on-ubuntu-14-04-via-apt-get
+2.service tomcat7 status
+3. ps -ef | grep tomcat
+4. netstat -lnp | grep 9141
+
+Installing httpd on centos7
+1. sudo su - 
+2. yum install httpd
+3. systemctl status/stop/start httpd
+
+Google Cloud
+1. Create firewall rule tcp:8080;udp:8080 with tag tomcat
+2. Add the Tag tomcat to the virtual machine
+
+ 

@@ -1,0 +1,115 @@
+
+1.List containers docker ps -a
+2. List of Images docker images
+3.Show Logs docker logs containerName
+
+1. Create docker container from image
+   docker create -t -i --name createpr ubuntu
+2. Get into the container by attaching
+  docker start createpr
+  docker attach createpr
+
+docker run --name containerName imageName   eg: docker run centos
+docker run --help
+-i interactive
+-t tty
+-P flag maps any required network ports inside the container to your host
+
+Use docker container already created, but stopped
+1. docker start conrainerId or docker restart containerId
+2. docker attach containerId
+
+1. Stopping running containers
+   docker stop containerName
+2. Remove/delete containers and Images
+   docker rm containerName
+
+docker run -i --name newcont centos ls -al
+ 
+Sample Web Container
+https://docs.docker.com/engine/tutorials/usingdocker/
+
+Installation
+yum install docker-engine
+systemctl enable docker.service
+systemctl start docker
+
+//***** Create an image from existing and Copy that image from Machine1 to Machine2
+Machine1
+1.Download an image
+docker pull centos
+2. Make an image from container
+mkdir mydockerimage
+cd mydockerimage
+vi Dockerfile
+  FROM centos
+  RUN apt-get -y update && apt-get install -y httpd
+  RUN touch /var/www/html/index.html
+  RUN echo "Hello World" >> index.html
+3. Build the image
+docker build -t docker-first .
+4. docker images
+5. Create a container to test
+docker create -i -t --name first1 docker-first
+6. docker start first1
+7. docker attach first1
+
+/////Copy container from machine1 to machine2
+docker save docker-first > docker-first.tar
+ls -sh docker-first.tar
+scp docker-first.tar ip:/home/
+
+//************Networking
+Networks are natural ways to isolate containers from other containers or networks
+Default Networks provided by Docker are bridge and overlay drivers, 
+by default all containers are added to bridge
+docker network --help
+docker network ls
+docker network inspect bridge
+docker network disconnect bridge networktest 
+1.Create a network
+  docker network create -d bridge my-bridge-network
+2. pass the network name while creating container, db application
+docker run -d --net=my-bridge-network --name db training/postgres
+ inspect container
+   docker inspect --format='{{json .NetworkSettings.Networks}}'  db
+ create web application
+docker run -d --name web training/webapp python app.py
+  inspect container
+    docker inspect --format='{{json .NetworkSettings.Networks}}'  web
+get the ip address of web
+  docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' web
+shell to your db
+  docker exec -it db bash
+ping web ip ----fails
+docker network connect my-bridge-network web
+ping --successful
+
+//*********Volume
+-Data volumes
+1. Add a data volume to a container using -v flag
+docker run -it -P --name web -v /webapp training/webapp bash
+
+docker inspect web -----search for Mount
+In the case of VirtualBox you need to make the host folder available as a shared folder in VirtualBox
+Docker-engine machine
+/var/lib/docker/volumes/e27...../_data
+Container
+/webapp
+
+-Data volume containers
+
+//**********Docker Swarm
+
+//******* SSH to machine
+docker machine
+ssh-keygen -t rsa -f ~/.ssh/my-ssh-key
+chmod 400 ~/.ssh/my-ssh-key
+
+
+
+
+
+
+
+
