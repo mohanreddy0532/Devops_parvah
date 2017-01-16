@@ -1,0 +1,12 @@
+
+node
+login to root
+chmod 700 .ssh 
+run ssh-keygen -t rsa
+copy public key to .ssh/authorized_keys
+change /etc/ssh/sshd_config yes for permitroot login
+
+manager
+copy private key to myfile
+chmod 600 myfile
+ssh -i myfile root@ipaddress

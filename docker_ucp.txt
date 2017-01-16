@@ -1,0 +1,31 @@
+# Docker Data Center CS Docker-engine, Docker Trusted Registry, Docker Universal Control Plane
+UCP is the enterprise-grade cluster management solution
+UCP is a containerized application that runs on the Commercially Supported(CS) Docker Engine
+Ports to be openend
+tcp:443;tcp:2376;tcp:2377;tcp:4789;udp:4789;tcp:7946;udp:7946;tcp:12376;tcp:12379;tcp:12380;tcp:12381;tcp:12382;tcp:12383;tcp:12384;tcp:12385;tcp:12386
+
+1. Create windows on google compute engine
+2. Install Remote Desktop on mac to access the windows machine, open rdp file directly
+3. Install putty on windows 
+4. Create 3 centos linux machines for manager,2 worker nodes with Commercial Supported docker
+
+curl -SLf https://packages.docker.com/1.12/install.sh | sh;
+sudo usermod -aG docker praveenparva;
+sudo systemctl status docker;
+sudo systemctl enable docker;
+sudo systemctl start docker;
+sudo systemctl status docker;
+
+5. on manager node(upc machine)
+sudo docker pull docker/ucp:latest;
+
+docker run --rm -it --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  docker/ucp install \
+  --host-address 10.128.0.12 \
+  --interactive 
+
+admin
+admin123
+
+add nodes on web ui

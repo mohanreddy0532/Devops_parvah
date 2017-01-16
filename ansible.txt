@@ -1,0 +1,52 @@
+1. First cd to .ssh do ssh-keygen, copy the id_rsa to key file and do ssh -i key ipaddress. Once authenticated the machine is always attached
+Inventory of hosts are your raw material
+Playbooks are instruction manuals
+Modules are tools in workshop
+
+*****Inventory --- put the hosts to be connected in this file 
+****Modules
+1. setup
+ansible all -m setup -a 'filter=*ipv4*' --tree /tmp/facts
+
+2. shell
+ansible agent -m shell -a 'ls -latr' -s
+-a for module argements 
+-s for sudo
+ansible agent -m shell -a 'yum install wget -y' -s
+
+
+# Practice exercise 
+https://www.digitalocean.com/community/tutorial_series/automating-your-php-application-deployment-process-with-ansible
+
+
+
+
+
+
+https://www.digitalocean.com/community/tags/ansible?type=tutorials
+
+https://www.digitalocean.com/community/tutorials/configuration-management-101-writing-ansible-playbooks
+
+epel-release
+sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+rpm -qa | grep epel
+
+ansible all -m ping 
+
+vi /etc/ansible/hosts
+
+public SSH key should be located in authorized_keys on those systems
+
+Ansible machine
+ssh-keygen
+public, private keys
+
+node1
+copy public key to authorized_keys 
+
+node2
+copy public key to authorized_keys
+
+ansible all -a "/bin/echo hello"
+

@@ -1,0 +1,18 @@
+# user details
+cat /etc/passwd
+# password details
+cat /etc/shadow
+
+init process
+cron
+
+http://www.thegeekstuff.com/2011/02/linux-boot-process/
+who -r
+
+Links
+http://www.thegeekstuff.com/2011/02/linux-boot-process/
+https://www.youtube.com/watch?v=unEb3GuFGCM
+https://www.youtube.com/watch?v=rLgRkjM7amo
+https://www.youtube.com/watch?v=l0QGLMwR-lY
+https://www.youtube.com/watch?v=omWh4ULQNJU
+

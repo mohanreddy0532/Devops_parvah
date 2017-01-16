@@ -1,0 +1,36 @@
+
+Installation 2 ways
+yum install https://pkg.jenkins.io/redhat-stable/jenkins-2.7.4-1.1.noarch.rpm
+or
+java -jar jenkins.war
+
+List all service systemctl
+ls /etc/rc.d/init.d/
+
+yum install java -y
+/var/lib/jenkins
+systemctl start jenkins
+systemctl status jenkins
+
+------on RHEL
+yum install nmap -y
+yum install net-tools
+
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+export JENKINS_HOME=/etc/default/jenkins
+export JENKINS_HOME=/var/lib/jenkins/
+export PATH=$JENKINS_HOME:$PATH
+
+on agent machine
+ssh-keygen -t rsa 
+add the private key to jenkins server to access
+
+vi /etc/ssh/sshd_config
+PermitRootLogin yes
+
+Create Remote directory /var/lib/jenkins
+
+Restrict where this project can be run
+
+

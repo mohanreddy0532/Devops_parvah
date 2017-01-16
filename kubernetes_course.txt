@@ -1,0 +1,27 @@
+Documentation > Guides
+
+docker: the container runtime, which Kubernetes depends on. v1.11.2 is recommended, but v1.10.3 and v1.12.1 are known to work as well.
+kubelet: the most core component of Kubernetes. It runs on all of the machines in your cluster and does things like starting pods and containers.
+kubectl: the command to control the cluster once it’s running. You will only need this on the master, but it can be useful to have on the other nodes as well.
+kubeadm: the command to bootstrap the cluster.
+
+1.
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=http://yum.kubernetes.io/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+       https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+setenforce 0
+yum install -y docker kubelet kubeadm kubectl kubernetes-cni
+systemctl enable docker && systemctl start docker
+systemctl enable kubelet && systemctl start kubelet
+
+2. kubeadm init 
+
+cd $GOPATH/src/github/com/udacity/ud615/kubernetes
+gcloud container clusters create k0  

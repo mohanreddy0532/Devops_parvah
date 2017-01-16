@@ -1,0 +1,59 @@
+
+What is snapshot?
+Final version of the development team
+
+Snapshot vs Version?
+Maven can automatically download the latest snapshot while building..
+In case of Version Maven doesn't fetch automatically.
+
+What is GAV?
+GroupID Id of the project group e.g com.company.bank 
+ArtifactID Id of the project e.g consumer-banking, along with groupId defines the artifact's location in Repository
+VersionId version of the project e.g:com.project.bank:consumer-banking:1.1
+
+Maven Lifecycle
+prepare-resources resource copying can be customized in this phase
+compile source code compilation
+package create Jar/war package as in POM.xml
+Install Install in local repo
+deploy deploy pkg in remote repo
+
+mvn clean ----- delete the build directory
+mvn package -----
+mvn install -
+mvn compile
+mvn site
+
+maven download
+sudo su -
+cd /opt
+wget http://redrockdigimark.com/apachemirror/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+tar xzf apache-maven-3.3.9-bin.tar.gz
+sudo yum install java-1.8.0-openjdk-devel
+
+-----add to .bashrc file
+export PATH=/opt/apache-maven-3.3.9/bin:$PATH
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-2.b15.el7_3.x86_64
+export PATH=$JAVA_HOME:$PATH
+
+git clone --depth=1 https://github.com/versionit/mvnrepo.git
+cd mvnrepo
+mvn package
+mvn install
+
+Nexus
+wget http://download.sonatype.com/nexus/3/latest-unix.tar.gz
+tar xzf 
+cd /home/praveenparva/nexus-3.2.0-01/bin
+./nexus start
+
+add 8081 firewall to google engine
+signin to nexus
+admin, admin123
+add url to pom.xml
+
+.m2/settings.xml
+create /opt/apache-maven-3.3.9/conf/settings.xml
+cp /opt/apache-maven-3.3.9/conf/settings.xml /home/praveenparva/.m2/
+
+
