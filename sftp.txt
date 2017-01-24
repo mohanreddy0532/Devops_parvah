@@ -1,0 +1,17 @@
+on manager node
+cp /etc/ansible/ . -rf
+now sync to your local computer using sftp
+
+
+*****Install sftp on sublime text
+packagecontrol.io
+command pallete
+Install package sftp
+
+https://wbond.net/sublime_packages/sftp/usage
+
+Create folder on local machine
+right click -> sync remote to local
+
+sftp-config.json give host, user, remote path, ssh_key_file
+

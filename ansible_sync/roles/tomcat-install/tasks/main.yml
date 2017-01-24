@@ -1,0 +1,35 @@
+---
+# - name: Extract Java
+#   unarchive:
+#     src: /home/praveenparva/jdk-8u121-linux-i586.tar.gz
+#     dest: /opt
+#   become: yes
+- name: create a group
+  group:
+    name: tom
+    state: present
+  become: yes
+- name: create a user
+  user:
+    name: tom
+    comment: "tom user in tom group"
+    group: tom
+  become: yes
+- name: create a tom directory
+  file:
+    path: /tom
+    state: directory
+    mode: 0755
+    owner: tom
+    group: tom
+  become: yes
+- name: Extract tomcat
+# become_user: tom
+  unarchive:
+    src: /home/praveenparva/apache-tomcat-9.0.0.M17.tar.gz
+    dest:  /tom
+  become: yes
+
+
+...
+

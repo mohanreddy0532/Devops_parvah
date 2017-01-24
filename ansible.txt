@@ -10,16 +10,13 @@ ansible all -m setup -a 'filter=*ipv4*' --tree /tmp/facts
 
 2. shell
 ansible agent -m shell -a 'ls -latr' -s
--a for module argements 
+-a for module arguments 
 -s for sudo
 ansible agent -m shell -a 'yum install wget -y' -s
 
 
 # Practice exercise 
 https://www.digitalocean.com/community/tutorial_series/automating-your-php-application-deployment-process-with-ansible
-
-
-
 
 
 

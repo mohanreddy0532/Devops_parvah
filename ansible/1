@@ -1,0 +1,10 @@
+cd /etc/ansible
+
+ansiblerhel
+ansibleubuntu
+ansiblecentos
+
+Install ansible
+sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum install -y ansible
+

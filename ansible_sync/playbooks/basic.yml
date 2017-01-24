@@ -1,0 +1,17 @@
+- hosts: centos
+  become: true
+
+  tasks:
+    - name: Install tree using yum
+      yum: 
+        name: tree 
+        state: installed
+
+- hosts: ubuntu
+  become: true
+
+  tasks:
+    - name: Install tree using apt
+      apt: 
+        name: tree
+        state: latest
