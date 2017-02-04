@@ -1,0 +1,77 @@
+Installing puppet server on a node
+sudo yum install netstat -y
+
+******website
+https://docs.puppet.com/puppetserver/2.7/install_from_packages.html
+
+sudo rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+sudo yum install puppetserver
+sudo systemctl start puppetserver
+
+agent
+sudo rpm -Uvh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+
+sudo yum install puppet-agent
+
+Master
+sudo su -
+puppet cert list
+hostname -f
+puppet cert sign puppet-agent.c.data-watch-157105.internal(Agent hostname)
+cd /etc/puppetlabs/code/environments/production/manifests/
+vi site.pp
+
+
+Agent
+sudo su -
+cd /etc/puppetlabs/puppet
+vi puppet.conf
+[main]
+server = master hostname (puppetserv.c.data-watch-157105.internal)
+puppet agent -t
+
+******Cleaning
+Master node ****
+ puppet cert clean puppet-agent.c.data-watch-157105.internal
+remove /etc/puppetlabs/puppet/ssl/ca/signed/
+
+Agent node ****
+/etc/puppetlabs/puppet
+mv ssl ssl_old
+puppet agent -t
+Now sign the cert on master
+puppet cert sign puppet-agent.c.data-watch-157105.internal
+
+********to auto sign nodes
+Goto Master server
+/etc/puppetlabs/puppet/puppet.conf
+autosign = true
+Goto agent and run puppet agent -t
+
+puppet config print all | grep auto
+puppet man config
+
+puppet agent -t --environment testing
+
+puppet config print all | grep run
+
+facter os
+*********** pulling  every 30 seconds
+on node
+vi /etc/puppetlabs/puppet/puppet.conf
+runinterval = 30
+systemctl start puppet
+on master 
+tail -f /var/log/puppetlabs/puppetserver/puppetserver-access.log 
+
+****uninstall rpm 
+rpm -e httpd
+
+*************ubuntu 
+apt-get update
+apt-get install puppet
+cd /etc/puppet/puppet.conf
+puppet agent -t
+cd /etc/puppetlabs/code/environments/production/manifests/
+
+

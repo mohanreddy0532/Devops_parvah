@@ -1,0 +1,36 @@
+------ 
+
+DATA-BAGS:
+---------
+
+cookbook for databag example is :: useradd
+
+knife data bag create users
+
+<Assuming I am in chef-repo directory>
+
+mkdir data_bags
+cd data_bags
+mkdir users
+cd users
+vi rama.json
+	{
+		"id" : "rama",
+		"gid" : 500
+	}
+:wq
+
+knife data bag from file users rama.json
+
+Add useradd recipe to the node
+
+knife node run_list add node1 recipe['useradd::userdata']
+
+Got client and run "chef-client"
+
+knife search users "id:*"
+knife search users "*:*"
+
+knife data bag edit users rama
+
+knife data bag remove users

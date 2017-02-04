@@ -1,0 +1,91 @@
+http://nagios-plugins.org/
+# Install nagios Server
+http://tecadmin.net/install-nagios-core-service-on-centos-rhel/#
+STEP1: INSTALL REQUIRED PACKAGES
+yum install httpd php php-cli gcc glibc glibc-common gd gd-devel net-snmp
+service httpd start
+
+STEP2:
+useradd nagios
+passwd nagios
+
+groupadd nagcmd
+usermod -a -G nagcmd nagios
+usermod -a -G nagcmd apache
+
+STEP3******Core Installation
+cd /opt/;
+wget http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-4.2.4.tar.gz;
+tar xzf nagios-4.2.4.tar.gz;
+cd nagios-4.2.4;
+./configure --with-command-group=nagcmd;
+make all;
+make install;
+make install-init;
+make install-config;
+make install-commandmode;
+
+make install-webconf
+
+STEP4: CONFIGURE APACHE
+htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+nagios
+service httpd restart
+Goto server URL
+
+STEP5: Install Nagios Plugins
+cd /opt;
+wget http://nagios-plugins.org/download/nagios-plugins-2.1.4.tar.gz;
+tar xzf nagios-plugins-2.1.4.tar.gz;
+cd nagios-plugins-2.1.4;
+
+./configure --with-nagios-user=nagios --with-nagios-group=nagios
+make
+make install
+
+STEP6: Verify and Start Nagios
+/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+service nagios start
+
+chkconfig --add nagios
+chkconfig nagios on
+
+-------------------------------- Install nagios Client:---------------------------
+
+enable epel repo
+sudo su -
+rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
+
+yum install nrpe -y
+vi /etc/nagios/nrpe.cfg
+
+allowed_hosts=127.0.0.1
+to
+allowed_hsots=127.0.0.1,10.128.0.2
+<10.128.0.2> that is my nagios server IP
+
+systemctl restart nrpe
+
+From Server:
+/usr/local/nagios/libexec/check_nrpe -H 10.128.0.3
+
+O/P expected is 
+
+NRPE v2.15
+
+-------------------nrpe installation on server---------------
+cd /opt/
+wget "https://downloads.sourceforge.net/project/nagios/nrpe-2.x/nrpe-2.15/nrpe-2.15.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fnagios%2Ffiles%2Fnrpe-2.x%2Fnrpe-2.15%2F&ts=1486180661&use_mirror=excellmedia" -O nrpe.tgz
+
+tar -xzf nrpe.tgz
+cd nrpe-2.15
+./configure 
+yum install openssl
+yum list all | grep openssl
+yum install openssl-devel.x86_64
+
+./configure 
+make 
+make all
+make install
+cd /usr/local/nagios/libexec

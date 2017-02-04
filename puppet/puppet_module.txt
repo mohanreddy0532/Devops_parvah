@@ -1,0 +1,11 @@
+/etc/puppetlabs/code/environments/production/modules
+
+puppet module generate praveen-webserver
+
+ cd /etc/puppetlabs/code/environments/production/modules
+  128  cd webserver/
+  132  cd manifests/
+  134  vim init.pp 
+  136  vim install.pp
+  153  vim vars.pp
+  155  vim check.pp

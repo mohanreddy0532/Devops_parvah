@@ -1,0 +1,66 @@
+1. Chef Server
+Create a google instance with 20GB disk
+
+sudo yum install wget -y
+wget https://packages.chef.io/files/stable/chef-server/12.11.1/el/7/chef-server-core-12.11.1-1.el7.x86_64.rpm
+
+
+chef-server-ctl user-create praveenparva praveen parva praveen.hadoopfs@gmail.com 'parva1234' --filename /home/praveenparva/chef_key.pem
+
+chef-server-ctl org-create short_name 'full_organization_name' --association_user user_name --filename ORGANIZATION-validator.pem
+
+chef-server-ctl org-create 4thcoffee 'Fourth Coffee, Inc.' --association_user praveenparva --filename /home/praveenparva/4thcoffee-validator.pem
+
+open https port 443
+
+2. Chef node
+sudo yum install  https://packages.chef.io/files/stable/chefdk/1.1.16/el/7/chefdk-1.1.16-1.el7.x86_64.rpm
+
+chef verify
+# cd /opt/chefdk
+chef generate app chef-repo
+cd chef-repo
+mkdir .chef
+cd .chef
+
+
+cd /opt/chefdk/
+knife client list
+
+ssl certificate copy
+sudo su -
+on chef server to chef dk
+copy /var/opt/opscode/nginx/ca/SERVER_HOSTNAME.crt to /opt/chefdk/chef-repo/trusted_certs/SERVER_HOSTNAME.crt 
+
+uname -a
+
+knife bootstrap 104.154.108.127 -N chefnode1 -x praveenparva --sudo
+knife client show chefnode1
+knife node list
+
+Create a cookbook
+knife cookbook create apache
+
+cd /opt/chefdk/cookbooks
+your apache cookbook is created here
+cd /opt/chefdk/cookbooks/apache/recipes
+create a receipe
+cd /opt/chefdk/cookbooks/apache/files/default
+create index.html file
+
+knife cookbook upload apache
+
+*****on chef server add the cookbook to runlist
+
+
+*****on chef node
+sudo chef-client
+
+
+irb installation
+sudo yum install ruby-irb
+
+
+
+
+
